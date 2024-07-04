@@ -7,7 +7,7 @@ from airflow.decorators import task
 with DAG(
     dag_id="dags_python_show_templates",
     schedule="30 9 * * *",
-    start_date=pendulum.datetime(2023, 3, 10, tz="Asia/Seoul"),
+    start_date=pendulum.datetime(2024, 6, 1, tz="Asia/Seoul"),
     catchup=True,   # False : 시작일자(2023.03.10)의 누락된 구간을 돌리지 않는다. True인 경우 전체를 돌린다.
 ) as dag:
 
