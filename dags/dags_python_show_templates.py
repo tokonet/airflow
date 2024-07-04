@@ -1,9 +1,8 @@
 import pendulum
 import datetime
 
-from airflow.models.dag import DAG
-from airflow.operators.python import PythonOperator
-from common.common_func import regist
+from airflow import DAG
+from airflow.decorators import task
 
 with DAG(
     dag_id="dags_python_show_templates",
