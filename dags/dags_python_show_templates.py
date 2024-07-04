@@ -8,10 +8,10 @@ with DAG(
     dag_id="dags_python_show_templates",
     schedule="30 9 * * *",
     start_date=pendulum.datetime(2023, 3, 10, tz="Asia/Seoul"),
-    catchup=True,   # False : 시작일자(2021.01.01)의 누락된 구간을 돌리지 않는다. True인 경우 전체를 돌린다.
+    catchup=True,   # False : 시작일자(2023.03.10)의 누락된 구간을 돌리지 않는다. True인 경우 전체를 돌린다.
 ) as dag:
 
-    @task(task_id="python_task")
+    @task(task_id='python_task')
     def show_templates(**kwargs):
         from pprint import pprint
         pprint(**kwargs)
