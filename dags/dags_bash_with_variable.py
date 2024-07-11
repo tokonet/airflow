@@ -1,14 +1,17 @@
-from airflow import DAG
+
 import pendulum
+
+from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.models import Variable
 
 with DAG(
     dag_id="dags_bash_with_variable",
     schedule="10 9 * * *",
-    start_date=pendulum.datetime(2023, 4, 1, tz="Asia/Seoul"),
+    start_date=pendulum.datetime(2024, 7, 1, tz="Asia/Seoul"),
     catchup=False
 ) as dag:
+
     var_value = Variable.get("sample_key")
 
     bash_var_1 = BashOperator(
