@@ -6,10 +6,10 @@ from airflow.operators.branch import BaseBranchOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    dag_id='dags_base_branch_operator',
-    start_date=pendulum.datetime(2024,7,1, tz='Asia/Seoul'),
-    schedule=None,
-    catchup=False
+    dag_id = 'dags_base_branch_operator',
+    start_date = pendulum.datetime(2024,7,1, tz='Asia/Seoul'),
+    schedule = None,
+    catchup = False
 ) as dag:
 
     class CustomBranchOperator(BaseBranchOperator):
@@ -30,21 +30,21 @@ with DAG(
         print(kwargs['selected'])
 
     task_a = PythonOperator(
-        task_id='task_a',
-        python_callable=common_func,
-        op_kwargs={'selected':'A'}
+        task_id = 'task_a',
+        python_callable = common_func,
+        op_kwargs = {'selected':'A'}
     )
 
     task_b = PythonOperator(
-        task_id='task_b',
-        python_callable=common_func,
-        op_kwargs={'selected':'B'}
+        task_id = 'task_b',
+        python_callable = common_func,
+        op_kwargs = {'selected':'B'}
     )
 
     task_c = PythonOperator(
-        task_id='task_c',
-        python_callable=common_func,
-        op_kwargs={'selected':'C'}
+        task_id = 'task_c',
+        python_callable = common_func,
+        op_kwargs = {'selected':'C'}
     )
 
     custom_branch_operator >> [task_a, task_b, task_c]
