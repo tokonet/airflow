@@ -1,0 +1,8 @@
+
+sudo apt-get install python-pip
+sudo pip install numpy
+sudo pip install pandas
+
+https://askubuntu.com/questions/70883/how-do-i-install-python-pandas
+
+
