@@ -5,7 +5,7 @@ from airflow.models.baseoperator import BaseOperator
 from airflow.hooks.base import BaseHook
 
 class SeoulApiToCsvOperator(BaseOperator):
-    template_fields = ('endpoint', 'path','file_name','base_dt')
+    template_fields = ('endpoint', 'path', 'file_name', 'base_dt')
 
     def __init__(self, dataset_nm, path, file_name, base_dt=None, **kwargs):
         super().__init__(**kwargs)
