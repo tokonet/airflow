@@ -6,3 +6,5 @@ sudo pip install pandas
 https://askubuntu.com/questions/70883/how-do-i-install-python-pandas
 
 
+sudo pip install requests
+

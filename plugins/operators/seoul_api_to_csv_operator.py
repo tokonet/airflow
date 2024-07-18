@@ -38,6 +38,7 @@ class SeoulApiToCsvOperator(BaseOperator):
                 end_row += 1000
 
         print('self.path & filename :', self.path + '/' + self.file_name)
+        print('os.path.exists :', os.path.exists(self.path))
         if not os.path.exists(self.path):
             os.system(f'mkdir -p {self.path}')
         total_row_df.to_csv(self.path + '/' + self.file_name, encoding='utf-8', index=False)
