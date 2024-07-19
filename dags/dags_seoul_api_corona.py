@@ -16,7 +16,7 @@ with DAG(
         task_id = 'tb_corona19_count_status',
         dataset_nm = 'TbCorona19CountStatus',
 #        path = '/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
-        path = '/home/files/TbCorona19CountStatus/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
+        path = '/home/airflow/files/TbCorona19CountStatus/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
         file_name = 'TbCorona19CountStatus.csv'
     )
 
@@ -25,7 +25,7 @@ with DAG(
         task_id = 'tv_corona19_vaccine_stat_new',
         dataset_nm = 'tvCorona19VaccinestatNew',
 #        path = '/opt/airflow/files/tvCorona19VaccinestatNew/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
-        path = '/home/files/tvCorona19VaccinestatNew/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
+        path = '/home/airflow/files/tvCorona19VaccinestatNew/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
         file_name = 'tvCorona19VaccinestatNew.csv'
     )
 
