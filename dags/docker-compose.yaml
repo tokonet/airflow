@@ -145,7 +145,7 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
     volumes:
-      - ./db/mysql/data:/var/lib/mysql  # 데이터베이스 파일 저장 위치
+      - ./db/mysql/data:/var/lib/mysql               # 데이터베이스 파일 저장 위치
       - ./db/mysql/init:/docker-entrypoint-initdb.d  # 초기화 SQL 파일 위치
     restart: always
     networks:
