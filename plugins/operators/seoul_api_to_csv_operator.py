@@ -39,7 +39,8 @@ class SeoulApiToCsvOperator(BaseOperator):
 
         self.log.info(f'self.path:{self.path}')
         self.log.info(f'self.filename:{self.file_name}')
-        print('os.path.exists :', os.path.exists(self.path))
+        self.log.info(f'os.path.exists:{os.path.exists(self.path)}')
+
         if not os.path.exists(self.path):
             print(f'mkdir -p {self.path}')
             os.system(f'mkdir -p {self.path}')
