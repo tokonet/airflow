@@ -30,7 +30,8 @@ class SeoulApiToCsvOperator(BaseOperator):
             self.log.info(f'self.base_url:{self.base_url}')
 
             row_df = self._call_api(self.base_url, start_row, end_row)
-            total_row_df = pd.concat([total_row_df, row_df.replace(r'\r','')])
+#            total_row_df = pd.concat([total_row_df, row_df])
+            total_row_df = pd.concat([total_row_df, row_df.replace("\r", "").replace("\n", "")])
             if len(row_df) < 1000:
                 break
             else:
