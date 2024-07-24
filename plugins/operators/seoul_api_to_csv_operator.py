@@ -68,5 +68,6 @@ class SeoulApiToCsvOperator(BaseOperator):
         print("key_nm:",key_nm)
         print("row_data:",row_data)
         row_df = pd.DataFrame(row_data)
+        print("row_df:",row_df)
 
         return row_df
