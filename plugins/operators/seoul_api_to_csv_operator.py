@@ -40,6 +40,7 @@ class SeoulApiToCsvOperator(BaseOperator):
         self.log.info(f'self.path:{self.path}')
         self.log.info(f'self.filename:{self.file_name}')
         self.log.info(f'os.path.exists:{os.path.exists(self.path)}')
+        print("row_df2:",row_df)
 
         if not os.path.exists(self.path):
             print(f'mkdir -p {self.path}')
@@ -61,13 +62,10 @@ class SeoulApiToCsvOperator(BaseOperator):
         print('request_url : ',request_url)
         response = requests.get(request_url, headers)
         contents = json.loads(response.text)
-        print("contents:",contents)
 
         key_nm = list(contents.keys())[0]
         row_data = contents.get(key_nm).get('row')
-        print("key_nm:",key_nm)
-        print("row_data:",row_data)
         row_df = pd.DataFrame(row_data)
-        print("row_df:",row_df)
+        print("row_df1:",row_df)
 
         return row_df
