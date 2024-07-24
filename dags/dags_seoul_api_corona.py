@@ -12,6 +12,9 @@ with DAG(
 ) as dag:
 
     '''서울시 코로나19 확진자 발생동향'''
+    # https://data.seoul.go.kr/dataList/OA-20461/S/1/datasetView.do
+    # 서울시 코로나19 확진자(전수감시) 발생동향 (2023.08.31.이전)
+
     tb_corona19_count_status = SeoulApiToCsvOperator(
         task_id = 'tb_corona19_count_status',
         dataset_nm = 'TbCorona19CountStatus',
@@ -20,6 +23,8 @@ with DAG(
     )
 
     '''서울시 코로나19 백신 예방접종 현황'''
+    # https://data.seoul.go.kr/dataList/OA-20914/S/1/datasetView.do
+    # 서울시 코로나19 백신 예방접종 현황 (2023.08.31.이전)
     tv_corona19_vaccine_stat_new = SeoulApiToCsvOperator(
         task_id = 'tv_corona19_vaccine_stat_new',
         dataset_nm = 'tvCorona19VaccinestatNew',
