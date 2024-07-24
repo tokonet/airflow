@@ -30,22 +30,20 @@ class SeoulApiToCsvOperator(BaseOperator):
             self.log.info(f'self.base_url:{self.base_url}')
 
             row_df = self._call_api(self.base_url, start_row, end_row)
-            total_row_df = pd.concat([total_row_df, row_df.replace(",","\t")])
+            total_row_df = pd.concat([total_row_df, row_df])
             if len(row_df) < 1000:
                 break
             else:
                 start_row = end_row + 1
                 end_row += 1000
 
-        self.log.info(f'self.path:{self.path}')
-        self.log.info(f'self.filename:{self.file_name}')
+        self.log.info(f'self.path & filename:{self.path}/{self.file_name}')
         self.log.info(f'os.path.exists:{os.path.exists(self.path)}')
-        print("row_df2:",row_df)
 
         if not os.path.exists(self.path):
             print(f'mkdir -p {self.path}')
             os.system(f'mkdir -p {self.path}')
-        total_row_df.to_csv(self.path + '/' + self.file_name, encoding='utf-8', index=False)
+        total_row_df.to_csv(self.path + '/' + self.file_name, sep='\t', encoding='utf-8', index=False)
 
     def _call_api(self, base_url, start_row, end_row):
         import requests
@@ -66,6 +64,5 @@ class SeoulApiToCsvOperator(BaseOperator):
         key_nm = list(contents.keys())[0]
         row_data = contents.get(key_nm).get('row')
         row_df = pd.DataFrame(row_data)
-        print("row_df1:",row_df)
 
         return row_df
