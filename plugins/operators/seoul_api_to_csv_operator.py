@@ -44,7 +44,6 @@ class SeoulApiToCsvOperator(BaseOperator):
         if not os.path.exists(self.path):
             print(f'mkdir -p {self.path}')
             os.system(f'mkdir -p {self.path}')
-        print('total_row_df :', total_row_df)
         total_row_df.to_csv(self.path + '/' + self.file_name, encoding='utf-8', index=False)
 
     def _call_api(self, base_url, start_row, end_row):
@@ -62,9 +61,10 @@ class SeoulApiToCsvOperator(BaseOperator):
         print('request_url : ',request_url)
         response = requests.get(request_url, headers)
         contents = json.loads(response.text)
+        print("contents:",contents)
 
         key_nm = list(contents.keys())[0]
         row_data = contents.get(key_nm).get('row')
-        row_df = pd.DataFrame(row_data.replace(",","\t"))
+        row_df = pd.DataFrame(row_data)
 
         return row_df
