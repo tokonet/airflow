@@ -1,8 +1,6 @@
-
+from airflow.hooks.base import BaseHook
 import psycopg2
 import pandas as pd
-
-from airflow.hooks.base import BaseHook
 
 class CustomPostgresHook(BaseHook):
 
@@ -33,18 +31,17 @@ class CustomPostgresHook(BaseHook):
         for col in file_df.columns:                             
             try:
                 # string 문자열이 아닐 경우 continue
-                file_df[col] = file_df[col].str.replace('\r\n','')      # 줄넘김 및 ^M 제거, str : 문자형인 경우에만 replace
+                file_df[col] = file_df[col].str.replace('\r\n','')      # 줄넘김 및 ^M 제거
                 self.log.info(f'{table_name}.{col}: 개행문자 제거')
             except:
                 continue 
-
+                
         self.log.info('적재 건수:' + str(len(file_df)))
         uri = f'postgresql://{self.user}:{self.password}@{self.host}/{self.dbname}'
-        print('uri:',uri)
         engine = create_engine(uri)
         file_df.to_sql(name=table_name,
-                       con=engine,
-                       schema='public',
-                       if_exists=if_exists,
-                       index=False
-                      )
+                            con=engine,
+                            schema='public',
+                            if_exists=if_exists,
+                            index=False
+                        )
