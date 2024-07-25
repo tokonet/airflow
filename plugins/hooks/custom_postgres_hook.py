@@ -24,7 +24,7 @@ class CustomPostgresHook(BaseHook):
         self.log.info('적재 대상파일:' + file_name)
         self.log.info('테이블 :' + table_name)
         self.get_conn()
-        header = '0' if is_header else None                       # is_header = True면 0, False면 None
+        header = 0 if is_header else None                       # is_header = True면 0, False면 None
         if_exists = 'replace' if is_replace else 'append'       # is_replace = True면 replace, False면 append
 
         self.log.info('header :' + header)
