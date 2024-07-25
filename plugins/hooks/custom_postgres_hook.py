@@ -1,6 +1,8 @@
-from airflow.hooks.base import BaseHook
+
 import psycopg2
 import pandas as pd
+
+from airflow.hooks.base import BaseHook
 
 class CustomPostgresHook(BaseHook):
 
@@ -27,11 +29,8 @@ class CustomPostgresHook(BaseHook):
         header = 0 if is_header else None                       # is_header = True면 0, False면 None
         if_exists = 'replace' if is_replace else 'append'       # is_replace = True면 replace, False면 append
 
-        self.log.info('header : ' + str(header))
-        self.log.info('if_exists : ' + if_exists)
-        self.log.info('delimiter : ' + delimiter)
-
         file_df = pd.read_csv(file_name, header=header, delimiter=delimiter)
+#        file_df = pd.read_csv(file_name, header=header, delimiter=delimiter, error_bad_line=False) # 라인이 오류가 있을 때 PASS
 
         for col in file_df.columns:                             
             try:
@@ -40,13 +39,8 @@ class CustomPostgresHook(BaseHook):
                 self.log.info(f'{table_name}.{col}: 개행문자 제거')
             except:
                 continue 
-                
+
         self.log.info('적재 건수:' + str(len(file_df)))
         uri = f'postgresql://{self.user}:{self.password}@{self.host}/{self.dbname}'
         engine = create_engine(uri)
-        file_df.to_sql(name=table_name,
-                            con=engine,
-                            schema='public',
-                            if_exists=if_exists,
-                            index=False
-                        )
+        file_df.to_sql(name=table_name, con=engine, schema='public', if_exists=if_exists, index=False)
